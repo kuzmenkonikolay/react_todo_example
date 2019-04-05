@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ff3660b8-ee1e-4cd6-b64e-5ca4b137558a" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/item-add-form/item-add-form.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/item-add-form/item-add-form.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/item-add-form/item-add-form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/item-add-form/item-add-form.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,8 +24,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/item-add-form/item-add-form.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+            <state relative-caret-position="313">
+              <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
             </state>
           </provider>
         </entry>
@@ -202,7 +201,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20420000" />
+    <option name="totallyTimeSpent" value="20713000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="804" extended-state="6" />
@@ -426,8 +425,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/item-add-form/item-add-form.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="16" column="47" selection-start-line="16" selection-start-column="47" selection-end-line="16" selection-end-column="47" />
+        <state relative-caret-position="313">
+          <caret line="19" column="19" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="19" />
         </state>
       </provider>
     </entry>

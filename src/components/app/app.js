@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 
 import AppHeader from '../app-header';
 import SearchPanel from '../search-panel';
@@ -7,21 +7,41 @@ import ItemStatusFilter from '../item-status-filter';
 
 import './app.css'
 
-const App = () => {
-    const todoData = [
-        { label: 'Drink coffee', important: false, id: 1 },
-        { label: 'Make awesome app', important: true, id: 2 },
-        { label: 'Have a lunch', important: false, id: 3 }
-    ];
+export default class App extends Component {
 
-    return <div className="todo-app">
-        <AppHeader toDo={1} done={3}/>
-        <div className="top-panel d-flex">
-            <SearchPanel/>
-            <ItemStatusFilter/>
-        </div>
-        <ToDoList todos={ todoData }/>
-    </div>;
-};
+    state = {
+        todoData: [
+            { label: 'Drink coffee', important: false, id: 1 },
+            { label: 'Make awesome app', important: true, id: 2 },
+            { label: 'Have a lunch', important: false, id: 3 }
+        ]
+    };
 
-export default App;
+    deleteItem = (id) => {
+        this.setState(({ todoData }) => {
+            const idx = todoData.findIndex((el) => el.id === id );
+            console.log(idx);
+            const newArray = [
+                ...todoData.slice(0, idx),
+                ...todoData.slice(idx + 1)
+            ];
+
+            return {
+                todoData: newArray
+            }
+        });
+    };
+
+    render() {
+        const { todoData } = this.state;
+
+        return <div className="todo-app">
+            <AppHeader toDo={1} done={3}/>
+            <div className="top-panel d-flex">
+                <SearchPanel/>
+                <ItemStatusFilter/>
+            </div>
+            <ToDoList todos={ todoData } onDeleted={(id) => this.deleteItem(id) }/>
+        </div>;
+    }
+}

@@ -9,12 +9,13 @@ import ItemAddForm from '../item-add-form';
 import './app.css'
 
 export default class App extends Component {
+    maxId = 100;
 
     state = {
         todoData: [
-            { label: 'Drink coffee', important: false, id: 1 },
-            { label: 'Make awesome app', important: true, id: 2 },
-            { label: 'Have a lunch', important: false, id: 3 }
+            this.createTodoItem('Drink coffee'),
+            this.createTodoItem('Make awesome app'),
+            this.createTodoItem('Have a lunch')
         ]
     };
 
@@ -33,32 +34,71 @@ export default class App extends Component {
         });
     };
 
-    addNewTodo = (title) => {
-        this.setState(({ todoData }) => {
-            const ids = todoData.map(({id}) => id);
-            const maxId = Math.max(...ids);
-            const newArray = [...todoData, {
-                label: title,
-                important: false,
-                id: maxId + 1
-            }];
+    createTodoItem(label) {
+        return {
+            label,
+            id: this.maxId++,
+            important: false,
+            done: false
+        }
+    }
 
+    addNewTodo = (title) => {
+        if(title.length > 0){
+            this.setState(({ todoData }) => {
+                const newArray = [...todoData, this.createTodoItem(title)];
+
+                return {
+                    todoData: newArray
+                }
+            });
+        }else{
+            alert('Title should present');
+        }
+    };
+
+    onToggleImportant = (id) => {
+        this.setState(({ todoData }) => {
             return {
-                todoData: newArray
+                todoData: this.toggleProperty(todoData, id, 'important')
+            };
+        });
+    };
+
+    onToggleDone = (id) => {
+        this.setState(({ todoData }) => {
+            return {
+                todoData: this.toggleProperty(todoData, id, 'done')
             }
         });
     };
 
+    toggleProperty(arr, id, propName){
+        const idx = arr.findIndex((el) => el.id === id );
+        const oldItem = arr[idx];
+        const newItem = { ...oldItem, [propName]: !oldItem[propName] };
+
+        return [
+            ...arr.slice(0, idx),
+            newItem,
+            ...arr.slice(idx + 1)
+        ];
+    };
+
     render() {
         const { todoData } = this.state;
+        const doneCount = todoData.filter((el) => el.done).length;
+        const todoCount = todoData.length - doneCount;
 
         return <div className="todo-app">
-            <AppHeader toDo={1} done={3}/>
+            <AppHeader toDo={todoCount} done={doneCount}/>
             <div className="top-panel d-flex">
                 <SearchPanel/>
                 <ItemStatusFilter/>
             </div>
-            <ToDoList todos={ todoData } onDeleted={(id) => this.deleteItem(id) }/>
+            <ToDoList todos={ todoData } onDeleted={(id) => this.deleteItem(id) }
+                      onToggleImportant={ this.onToggleImportant }
+                      onToggleDone={ this.onToggleDone }  />
             <ItemAddForm addNewItem={(title) => this.addNewTodo(title) }/>
         </div>;
     }
